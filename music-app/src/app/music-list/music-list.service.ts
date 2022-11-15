@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 
@@ -8,6 +8,7 @@ import { Tracklist } from "../shared/trackList.model";
 const CLIENT_ID = "86c3692b956f4c72a651bbc1f954c2ef";
 const CLIENT_SECRET = "1d009847f7a24d009a17e5490c119cc2";
 const REDIRECT_URI = "localhost:4200/musiclist/";
+const BEARER_TOKEN = "BQBp_pTTTZVMe8d09ycmsZAW01lwKNgzUo9fC0HhiSTELJjt1CJHxbkh8mkgL-peRPNNDBl4ULmpVQpACP-tMMB_KaS60ZmhBTlWPiLlEg6czWZC-irCNC-vv8lBZY7xSOTpiMNqPvl1q0huFvqGV4a7uUFAZNGeJkEChveslAVeYxQ"
 
 @Injectable({
   providedIn: 'root'
@@ -69,9 +70,17 @@ export class MusicListService{
     this.albumChanged.next(this.album.slice());
   }
 
-  searchMusic(result?: string){
+  private searchHeaders = new HttpHeaders({
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Credentials': 'true',
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+    "Authorization": BEARER_TOKEN
+  });
+
+  searchMusic(result: string){
     // const query = result.split(' ').join('').toLowerCase();
-    this.http.get(`https://api.spotify.com/v1/search?type=album:Nas`).subscribe(
+    this.http.get(`https://api.spotify.com/v1/search?q=artist%3A${result}&type=album&market=US&limit=25&offset=0`, {headers: this.searchHeaders}).subscribe(
       (response) => {
         console.log(response);
       }
