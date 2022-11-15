@@ -8,7 +8,7 @@
       <button class="btn btn-primary" style="margin-bottom: 10px;" (click)="onNewAlbum()" *ngIf="isLoggedIn">New Album</button>
       <app-music-search></app-music-search>
     </div>
-    <div class="col">
+    <div class="col" >
       <app-album-detail
       *ngFor="let albumElem of albums; let i = index"
       [album]="albumElem"

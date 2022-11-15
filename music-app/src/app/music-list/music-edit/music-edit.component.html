@@ -38,7 +38,7 @@
             placeholder="YYYY">
         </div>
         <div class="col-xs-12" style="margin-top: 10px;">
-          <label for="genre">Cover Art:</label>
+          <label for="cover">Cover Art:</label>
           <input
             type="text"
             id="cover"
@@ -55,12 +55,14 @@
             [formGroupName]="i"
             style="margin-top: 10px;">
             <div class="col-xs-2">
+              <label for="trackOrder">Track Number:</label>
               <input
                 type="number"
                 class="form-control"
                 formControlName="trackOrder">
             </div>
             <div class="col-xs-8">
+              <label for="trackName">Track Name:</label>
               <input
                 type="text"
                 class="form-control"
