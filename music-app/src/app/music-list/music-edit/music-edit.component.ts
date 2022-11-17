@@ -36,6 +36,7 @@ export class MusicEditComponent implements OnInit {
     } else {
       this.musicListService.addAlbum(this.albumEditForm.value);
     }
+    this.onCancel();
   }
 
   onAddTrack(){
@@ -49,6 +50,10 @@ export class MusicEditComponent implements OnInit {
 
   onDeleteTrack(index: number){
     (<FormArray>this.albumEditForm.get('trackList')).removeAt(index);
+  }
+
+  onCancel(){
+    this.router.navigate(['../'], {relativeTo: this.route})
   }
 
   get controls(){
