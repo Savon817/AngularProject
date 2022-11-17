@@ -1,9 +1,30 @@
 <div class="container" style="text-align: center;">
-      <h1 >Welcome to the Music Bookmark!</h1>
-      <p>This app's purpose is to be a utility for those that like/want to keep bookmark for album
-        they would like to later listen to.</p>
-      <!-- <p>On this is the </p> -->
-      <hr>
-      <button class="btn btn-primary" id="togglePlay">Toggle Play</button>
-      <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <h1 >Welcome to the Music Bookmark!</h1>
+    <p>This app's purpose is to be a utility for those that like/want to keep bookmark for album
+      they would like to later listen to.</p>
+    <!-- <p>On this is the </p> -->
+    <hr>
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img [src]="imgPath" class="d-block w-100" [alt]="altTitle">
+          <h5>Music List Example</h5>
+          <p>This is a preview of what the Music List page look like.</p>
+        </div>
+        <div class="carousel-item">
+          <img src="..." class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="..." class="d-block w-100" alt="...">
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
 </div>
