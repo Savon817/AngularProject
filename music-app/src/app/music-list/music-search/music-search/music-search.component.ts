@@ -16,6 +16,6 @@ export class MusicSearchComponent implements OnInit {
 
   onSubmit(musicSearchForm: NgForm){
     console.log(musicSearchForm.value);
-    this.musiclist.searchMusic();
+    this.musiclist.searchMusic(musicSearchForm.value.search);
   }
 }
