@@ -2,12 +2,11 @@
   <h1 style="text-align: center;">Music List</h1>
   <p style="text-align: center;">On this page is the Music List, here you'll be able to add or recommend to a public list of albums for others to try out.</p>
   <p *ngIf="!isLoggedIn" style="text-align: center;">If you want to have your own list you can sign up for free at the top right of the page.</p>
+
+  <button class="btn btn-primary" style="margin-right: 10px;" (click)="onNewAlbum()" *ngIf="isLoggedIn">New Album</button>
+  <app-music-search></app-music-search>
   <hr>
   <div class="row">
-    <div class="col">
-      <button class="btn btn-primary" style="margin-right: 10px;" (click)="onNewAlbum()" *ngIf="isLoggedIn">New Album</button>
-      <app-music-search></app-music-search>
-    </div>
     <div class="col" >
       <app-album-detail
       *ngFor="let albumElem of albums; let i = index"

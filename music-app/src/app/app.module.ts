@@ -36,7 +36,7 @@ import { AlertComponent } from './shared/alert/alert.component';
     ProfileComponent,
     DropdownDirective,
     PlaceholderDirective,
-    AlertComponent
+    AlertComponent,
   ],
   imports: [
     BrowserModule,

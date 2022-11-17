@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: LandingPageComponent},
   {path: 'musiclist', component: MusicListComponent, children:[
-    {path: 'new', component: MusicEditComponent},
+    {path: 'new', component: MusicEditComponent, canActivate: [AuthGuard]},
     {path: ':id', component: AlbumInfoComponent},
     {path: ':id/edit', component: MusicEditComponent},
   ]},
