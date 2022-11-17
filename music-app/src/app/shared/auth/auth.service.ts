@@ -1,7 +1,7 @@
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { BehaviorSubject, catchError, tap } from "rxjs";
+import { BehaviorSubject, catchError, tap, throwError } from "rxjs";
 import { User } from "./user.model";
 
 //Firebase Crendentials
@@ -40,7 +40,9 @@ export class AuthService{
         password: password,
         returnSecureToken: true
       }
-    ).pipe(tap(resData => {
+    ).pipe(
+      catchError(this.handleError),
+      tap(resData => {
       this.handleAuthentication(
         resData.email,
         resData.localId,
@@ -58,7 +60,9 @@ export class AuthService{
         password: password,
         returnSecureToken: true
       }
-    ).pipe(tap(resData => {
+    ).pipe(
+      catchError(this.handleError),
+      tap(resData => {
       this.handleAuthentication(
         resData.email,
         resData.localId,
@@ -103,25 +107,25 @@ export class AuthService{
   })
 
 
-  spotifyLogin(){
-    return this.http.get(
-      'https://accounts.spotify.com/authorize',
-      {params: {
-        'client_id' : CLIENT_ID,
-        'response_type' : 'code',
-        'redirect_uri' : REDIRECT_URI,
-        'scope' : 'user-read-private user-read-email',
-        'show_dialog': true },
-        headers: this.headers
-      }).pipe(catchError((err) => {
-        console.log(err);
-        throw err;
-      })).subscribe(
-        response => {
-          console.log(response)
-        }
-      );
-  }
+  // spotifyLogin(){
+  //   return this.http.get(
+  //     'https://accounts.spotify.com/authorize',
+  //     {params: {
+  //       'client_id' : CLIENT_ID,
+  //       'response_type' : 'code',
+  //       'redirect_uri' : REDIRECT_URI,
+  //       'scope' : 'user-read-private user-read-email',
+  //       'show_dialog': true },
+  //       headers: this.headers
+  //     }).pipe(catchError((err) => {
+  //       console.log(err);
+  //       throw err;
+  //     })).subscribe(
+  //       response => {
+  //         console.log(response)
+  //       }
+  //     );
+  // }
 
   logout(){
     this.user.next(null);
@@ -151,4 +155,23 @@ export class AuthService{
     this.autoLogout(expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));
   }
+
+  private handleError(errorRes: HttpErrorResponse){
+    let errorMessage = 'An unknown error occurred'
+    if(!errorRes.error || !errorRes.error.error){
+      return throwError(errorMessage);
+    }
+    switch(errorRes.error.error.message){
+      case 'EMAIL_EXISTS':
+        errorMessage = 'This email already exists';
+        break;
+      case 'EMAIL_NOT_FOUND':
+        errorMessage = 'This email does not exist';
+        break;
+      case 'INVALID_PASSWORD':
+        errorMessage = 'This password is not correct';
+        break;
+    }
+    return throwError(errorMessage);
+    }
 }
