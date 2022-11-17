@@ -99,12 +99,12 @@ export class AuthService{
     }
   }
 
-  private headers = new HttpHeaders({
-    'Access-Control-Allow-Origin': '*',
-    // 'Access-Control-Allow-Credentials': 'true',
-    // 'Content-Type' : 'application/x-www-form-urlencoded',
-    // 'Authorization' : `Basic<base64 encoded ${CLIENT_ID}:${CLIENT_SECRET}`
-  })
+  // private headers = new HttpHeaders({
+  //   'Access-Control-Allow-Origin': '*',
+  //   // 'Access-Control-Allow-Credentials': 'true',
+  //   // 'Content-Type' : 'application/x-www-form-urlencoded',
+  //   // 'Authorization' : `Basic<base64 encoded ${CLIENT_ID}:${CLIENT_SECRET}`
+  // })
 
 
   // spotifyLogin(){
@@ -138,6 +138,7 @@ export class AuthService{
   }
 
   autoLogout(expirationDuration: number){
+    console.log(expirationDuration);
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationDuration);
