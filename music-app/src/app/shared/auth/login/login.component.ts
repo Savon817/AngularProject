@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value).subscribe((res: any) => {
       if(res.success){
         this.userService.setCurrentUser(res.payload.user);
-        this.route.navigate([''])
+        this.route.navigate(['musiclist'])
         this.authService.setToken(res.payload.token);
         console.log(res);
       }
