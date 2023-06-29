@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { BehaviorSubject, catchError, tap, throwError } from "rxjs";
 
 import { User } from "./user.model";
+import { UserService } from "./user.service";
 
 //Firebase Crendentials
 const SIGNUP_KEY = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAklE7r4FP7CvxWyMmJ3YKXBE5pA6pTocU';
@@ -28,76 +29,62 @@ export interface AuthResponseData {
   providedIn: 'root',
 })
 export class AuthService{
+  private baseUrl = 'http://localhost:3000/api/v1/users/'
 
   user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
 
-  constructor(private http: HttpClient, private router: Router){}
+  constructor(private http: HttpClient, private router: Router, private userService: UserService){}
 
-  signup(email: string, password: string){
-    return this.http.post<AuthResponseData>(SIGNUP_KEY,
-      {
-        email: email,
-        password: password,
-        returnSecureToken: true
-      }
-    ).pipe(
-      catchError(this.handleError),
-      tap(resData => {
-      this.handleAuthentication(
-        resData.email,
-        resData.localId,
-        resData.idToken,
-        +resData.expiresIn
-      );
-    }))
+  setCurrentUser(user: User){
+    this.user.next(user);
+  }
+
+  public get currentUser(): User {
+    return this.user.value;
+  }
+
+  signup(user: any){
+    return this.http.post(this.baseUrl + 'create', user);
   }
 
 
-  login(email: string, password: string){
-    return this.http.post<AuthResponseData>(LOGIN_KEY,
-      {
-        email: email,
-        password: password,
-        returnSecureToken: true
-      }
-    ).pipe(
-      catchError(this.handleError),
-      tap(resData => {
-      this.handleAuthentication(
-        resData.email,
-        resData.localId,
-        resData.idToken,
-        +resData.expiresIn
-      );
-    }))
+  login(user: any){
+    return this.http.post(this.baseUrl + 'login', user);
+  }
+
+  setToken(token: any){
+    localStorage.setItem('token', JSON.stringify(token));
+  }
+
+  getToken(){
+    const token = localStorage.getItem('token');
+    if(token != null){
+      return JSON.parse(token)
+    } else {
+      return null;
+    }
+  }
+
+  removeToken(){
+    localStorage.removeItem('token');
   }
 
   autoLogin(){
-    const userData: {
-      email: string,
-      id: string,
-      _token: string,
-      _tokenExpirationDate: string
-    } = JSON.parse(localStorage.getItem('userData'));
-    if(!userData){
+    const token = this.getToken();
+    if(!token){
       return;
     }
 
-    const loadedUser = new User(
-      userData.email,
-      userData.id,
-      userData._token,
-      new Date(userData._tokenExpirationDate)
-    );
-
-    if(loadedUser.token){
-      this.user.next(loadedUser);
-      const expirationDuration =
-        new Date(userData._tokenExpirationDate).getTime() -
-        new Date().getTime();
-      this.autoLogout(expirationDuration);
-    }
+    this.http.get(this.baseUrl + 'me', {
+      headers: {
+        Authorization: `Bearer ${token.value}`
+      }
+    }).subscribe((res: any) => {
+      if(res.success){
+        this.userService.setCurrentUser(res.payload.user);
+      }
+    })
   }
 
   // private headers = new HttpHeaders({
@@ -129,13 +116,21 @@ export class AuthService{
   // }
 
   logout(){
-    this.user.next(null);
-    this.router.navigate(['/home']);
-    localStorage.removeItem('userData');
-    if(this.tokenExpirationTimer){
-      clearTimeout(this.tokenExpirationTimer)
+    const token = this.getToken();
+
+    if (token){
+      this.http.delete(this.baseUrl + 'logout', {
+        headers: {
+          'Authorization': `Bearer ${token.value}`
+        }
+      }).subscribe((res:any) => {
+        if(res.success){
+          this.setToken(null);
+          this.userService.setCurrentUser(null);
+          this.router.navigate(['/login']);
+        }
+      })
     }
-    this.tokenExpirationTimer = null;
   }
 
   autoLogout(expirationDuration: number){
