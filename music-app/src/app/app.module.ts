@@ -16,9 +16,10 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
 import { MusicSearchComponent } from './music-list/music-search/music-search/music-search.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DropdownDirective } from './shared/dropdown.directive';
-import { AuthInterceptor } from './shared/auth/auth-interceptor.service';
+// import { AuthInterceptor } from './shared/auth/auth-interceptor.service';
 import { PlaceholderDirective } from './shared/placeholder.directive';
 import { AlertComponent } from './shared/alert/alert.component';
+import { LoginComponent } from './shared/auth/login/login.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { AlertComponent } from './shared/alert/alert.component';
     DropdownDirective,
     PlaceholderDirective,
     AlertComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -46,11 +48,11 @@ import { AlertComponent } from './shared/alert/alert.component';
     ReactiveFormsModule,
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    }
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: AuthInterceptor,
+    //   multi: true
+    // }
   ],
   bootstrap: [AppComponent]
 })

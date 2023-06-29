@@ -140,19 +140,6 @@ export class AuthService{
     }, expirationDuration);
   }
 
-  private handleAuthentication(
-    email: string,
-    userId: string,
-    token:string,
-    expiresIn: number
-  ){
-    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-    const user = new User(email, userId, token, expirationDate);
-    this.user.next(user);
-    this.autoLogout(expiresIn * 1000);
-    localStorage.setItem('userData', JSON.stringify(user));
-  }
-
   private handleError(errorRes: HttpErrorResponse){
     let errorMessage = 'An unknown error occurred'
     if(!errorRes.error || !errorRes.error.error){
