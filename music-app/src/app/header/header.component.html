@@ -1,42 +1,39 @@
 <nav class="navbar navbar-expand-sm sticky-top"  style="background-color: #0085CA;">
 
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/home">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-boombox" viewBox="0 0 16 16">
-        <path d="M2.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Zm2 0a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Zm7.5-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Zm1.5.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Zm-7-1a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3Zm5.5 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Z"/>
-        <path d="M11.5 13a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm0-1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3ZM5 10.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Z"/>
-        <path d="M7 10.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm-1 0a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z"/>
-        <path d="M14 0a.5.5 0 0 1 .5.5V2h.5a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h12.5V.5A.5.5 0 0 1 14 0ZM1 3v3h14V3H1Zm14 4H1v7h14V7Z"/>
-      </svg>
-      Music Bookmark
-    </a>
+    <a class="navbar-brand" routerLink="/home">Music Bookmark</a>
 
-    <ul class="navbar-nav" style="display: flex; align-items: center">
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/home">Home</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link"  routerLink="/musiclist">Music List</a>
-      </li>
-      <!-- <li class="nav-item" routerLinkActive="active" *ngIf="isLoggedIn">
-        <a class="nav-link" routerLink="/profile">Profile</a>
-      </li> -->
-      <li class="nav-item" routerLinkActive="active" *ngIf="isLoggedIn">
-        <a class="nav-link" style="cursor: pointer;" (click)="onSend()">Send to Server</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active" *ngIf="isLoggedIn">
-        <a class="nav-link" style="cursor: pointer;" (click)="onRetrieve()">Retrieve from Server</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active" *ngIf="isLoggedIn">
-        <a class="nav-link" routerLink="/home">
-          <button type="button" class="btn btn-danger" (click)="onLogout()">Logout</button>
-        </a>
-      </li>
-      <li class="nav-item" routerLinkActive="active" *ngIf="!isLoggedIn">
-        <a class="nav-link" routerLink="/auth">
-          <button type="button" class="btn btn-dark">Signup/Login</button>
-        </a>
-      </li>
-    </ul>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav" style="display: flex; align-items: center">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link"  routerLink="/musiclist">Music List</a>
+        </li>
+        <!-- <li class="nav-item" routerLinkActive="active" *ngIf="isLoggedIn">
+          <a class="nav-link" routerLink="/profile">Profile</a>
+        </li> -->
+        <li class="nav-item" routerLinkActive="active" *ngIf="isLoggedIn">
+          <a class="nav-link" style="cursor: pointer;" (click)="onSend()">Send to Server</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" *ngIf="isLoggedIn">
+          <a class="nav-link" style="cursor: pointer;" (click)="onRetrieve()">Retrieve from Server</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" *ngIf="isLoggedIn">
+          <a class="nav-link" routerLink="/home">
+            <button type="button" class="btn btn-danger" (click)="onLogout()">Logout</button>
+          </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" *ngIf="!isLoggedIn">
+          <a class="nav-link" routerLink="/auth">
+            <button type="button" class="btn btn-dark">Signup/Login</button>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
