@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs';
 
 import { AuthService } from '../shared/auth/auth.service'
 import { DataStorageService } from '../shared/data-storage.service';
+import { UserService } from '../shared/auth/user.service';
+import { User } from '../shared/auth/user.model';
 
 @Component({
   selector: 'app-header',
@@ -11,22 +13,16 @@ import { DataStorageService } from '../shared/data-storage.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   private userSub: Subscription;
-  isLoggedIn: boolean = false;
+  // isLoggedIn: boolean = false;
+  currentUser: User = null;
 
-  constructor( private authService: AuthService, private dataStorageService: DataStorageService) {}
+  constructor( private authService: AuthService, private userService: UserService) {}
 
   ngOnInit(): void {
     this.userSub = this.authService.user.subscribe( user => {
-      this.isLoggedIn = !!user;
+      console.log(user);
+      this.currentUser = user;
     });
-  }
-
-  onSend(){
-    this.dataStorageService.storeAlbum();
-  }
-
-  onRetrieve(){
-    this.dataStorageService.fetchAlbum().subscribe();
   }
 
   onLogout(){

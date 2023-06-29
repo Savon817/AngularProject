@@ -1,0 +1,69 @@
+<img src="/assets/images/quiz-time.jpg" alt style="
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;">
+
+<section class="text-center container" style="margin: 10%;">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
+              <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
+                <div class="form-outline mb-4">
+                  <input type="email" class="form-control form-control-lg"  formControlName="email"/>
+                  <label class="form-label">Your Email</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="text" class="form-control form-control-lg" formControlName="phone"/>
+                  <label class="form-label">Phone</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="text" class="form-control form-control-lg" formControlName="first_name"/>
+                  <label class="form-label">First Name</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="text" class="form-control form-control-lg" formControlName="last_name"/>
+                  <label class="form-label">Last Name</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="password" class="form-control form-control-lg" formControlName="password" />
+                  <label class="form-label">Password</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="password" class="form-control form-control-lg" formControlName="password_confirmation"/>
+                  <label class="form-label">Repeat your password</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="text" class="form-control form-control-lg" formControlName="username"/>
+                  <label class="form-label">Username</label>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                  <button type="submit"
+                    class="btn btn-outline-primary btn-block btn-lg gradient-custom-4 text-body">Sign up</button>
+                </div>
+
+                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a routerLink="/login"
+                    class="fw-bold text-body"><u>Login here</u></a></p>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

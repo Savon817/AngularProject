@@ -20,6 +20,7 @@ import { DropdownDirective } from './shared/dropdown.directive';
 import { PlaceholderDirective } from './shared/placeholder.directive';
 import { AlertComponent } from './shared/alert/alert.component';
 import { LoginComponent } from './shared/auth/login/login.component';
+import { SignupComponent } from './shared/auth/signup/signup.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { LoginComponent } from './shared/auth/login/login.component';
     DropdownDirective,
     PlaceholderDirective,
     AlertComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

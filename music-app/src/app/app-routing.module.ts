@@ -9,6 +9,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AuthComponent } from './shared/auth/auth.component';
 import { AuthGuard } from './shared/auth/auth.guard';
 import { LoginComponent } from './shared/auth/login/login.component';
+import { SignupComponent } from './shared/auth/signup/signup.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -20,6 +21,7 @@ const routes: Routes = [
   ]},
   // { path: 'auth', component: AuthComponent },
   { path: 'login', component: LoginComponent},
+  { path: 'signup', component: SignupComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] }
 ];
 

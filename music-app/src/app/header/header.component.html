@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm sticky-top"  style="background-color: #0085CA;">
+<nav class="navbar navbar-expand-lg sticky-top"  style="background-color: #0085CA;">
 
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/home">Music Bookmark</a>
@@ -7,31 +7,18 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse">
-      <ul class="navbar-nav" style="display: flex; align-items: center">
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/home">Home</a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/signup" *ngIf="!currentUser">Sign Up</a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link"  routerLink="/musiclist">Music List</a>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login" *ngIf="!currentUser">Log In</a>
         </li>
-        <!-- <li class="nav-item" routerLinkActive="active" *ngIf="isLoggedIn">
-          <a class="nav-link" routerLink="/profile">Profile</a>
-        </li> -->
-        <li class="nav-item" routerLinkActive="active" *ngIf="isLoggedIn">
-          <a class="nav-link" style="cursor: pointer;" (click)="onSend()">Send to Server</a>
+        <li>
+          <a class="nav-link" routerLink="/musiclist" *ngIf="currentUser"> Music List</a>
         </li>
-        <li class="nav-item" routerLinkActive="active" *ngIf="isLoggedIn">
-          <a class="nav-link" style="cursor: pointer;" (click)="onRetrieve()">Retrieve from Server</a>
-        </li>
-        <li class="nav-item" routerLinkActive="active" *ngIf="isLoggedIn">
-          <a class="nav-link" routerLink="/home">
-            <button type="button" class="btn btn-danger" (click)="onLogout()">Logout</button>
-          </a>
-        </li>
-        <li class="nav-item" routerLinkActive="active" *ngIf="!isLoggedIn">
-          <a class="nav-link" routerLink="/auth">
-            <button type="button" class="btn btn-dark">Signup/Login</button>
-          </a>
+        <li class="nav-item">
+          <button class="btn btn-danger" (click)="onLogout()" *ngIf="currentUser">Log Out</button>
         </li>
       </ul>
     </div>
