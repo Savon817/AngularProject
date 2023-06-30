@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
   onSubmit(){
     this.authService.signup(this.signupForm.value).subscribe((res: any) => {
       if(res.success){
-        this.route.navigate(['/home']);
+        this.route.navigate(['/login']);
       }
     })
     console.log(this.signupForm.value);
